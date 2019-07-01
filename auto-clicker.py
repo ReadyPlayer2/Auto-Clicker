@@ -5,6 +5,7 @@ window = tk.Tk()
 
 window.title("Hello world!")
 
+# hold state to determine if we need to action start/stop commands
 state = "stop"
 
 def startClicking() :
@@ -18,6 +19,7 @@ def stopClicking() :
 # get user input
 command = input("Choose from 'start', 'stop', or 'quit'. =>")
 
+# loop until quit is input
 while (command != "quit"):
     if (command == state):
         print("Already in that state.")
