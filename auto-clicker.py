@@ -14,6 +14,7 @@ state = "STOPPED"
 clicker_thread = None
 stop_event = threading.Event()
 
+
 def startClicking():
     global clicker_thread 
     clicker_thread = threading.Thread(target=clicking_thread)
@@ -46,7 +47,7 @@ while (command != "quit"):
             log.info("Already in that state.")
         else:
             state = startClicking()
-    elif (command == "stop" and state != "STOPPED"):
+    elif (command == "stop"):
         if (state == "STOPPED"):
             log.info("Already in that state.")
         else:
