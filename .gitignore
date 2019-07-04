@@ -2,3 +2,6 @@
 build
 *.env
 *.key
+
+# python
+__pycache__
