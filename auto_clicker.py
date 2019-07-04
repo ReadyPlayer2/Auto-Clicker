@@ -19,13 +19,11 @@ class Autoclicker(object):
         Autoclicker.clicker_thread.daemon = True
         Autoclicker.clicker_thread.start()
         Autoclicker.state = STATE.STARTED
-        return
 
     @staticmethod
     def stopClicking():
         Autoclicker.stop_event.set()
         Autoclicker.state = STATE.STOPPED
-        return
 
     @staticmethod
     def getState():
