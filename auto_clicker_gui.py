@@ -34,6 +34,8 @@ def click_time():
         set_time.delete(0, tk.END)
         set_time.insert(0, f"Interval set")
         set_time_button.focus()  # remove blinking cursor by focusing on set time button
+    else:
+        set_time.insert(0, "No change")
 
 
 startStopText = tk.StringVar()
