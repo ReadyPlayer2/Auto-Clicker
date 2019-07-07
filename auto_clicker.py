@@ -3,9 +3,11 @@ import threading
 import time
 import enum
 
+
 class STATE(enum.Enum):
     STARTED = 1
     STOPPED = 0
+
 
 class Autoclicker(object):
     state = STATE.STOPPED
@@ -15,7 +17,8 @@ class Autoclicker(object):
 
     @staticmethod
     def startClicking():
-        Autoclicker.clicker_thread = threading.Thread(target=Autoclicker.__clicking_thread)
+        Autoclicker.clicker_thread = threading.Thread(
+            target=Autoclicker.__clicking_thread)
         # make the clicker thread a daemon so it lives and dies with the main application
         Autoclicker.clicker_thread.daemon = True
         Autoclicker.clicker_thread.start()
@@ -37,4 +40,3 @@ class Autoclicker(object):
             pyautogui.click()
         # reset the stop event object
         Autoclicker.stop_event = threading.Event()
-
