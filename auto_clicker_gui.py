@@ -10,15 +10,15 @@ window.maxsize(400, 200)
 validation_regex = r"(?P<time>[\d]+)"  # only capture numbers
 
 
-def handleStartStopPress():
-    if ((ac.Autoclicker.getState() == ac.STATE.STOPPED)):
-        ac.Autoclicker.startClicking()
-        startStopText.set("STOP")
-        startStopButton.configure(bg="red")
+def handle_start_stop_press():
+    if ((ac.Autoclicker.get_state() == ac.STATE.STOPPED)):
+        ac.Autoclicker.start_clicking()
+        start_stop_text.set("STOP")
+        start_stop_button.configure(bg="red")
     else:
-        ac.Autoclicker.stopClicking()
-        startStopText.set("START")
-        startStopButton.configure(bg="green")
+        ac.Autoclicker.stop_clicking()
+        start_stop_text.set("START")
+        start_stop_button.configure(bg="green")
 
 
 def click_time():
@@ -50,11 +50,11 @@ def get_validated_interval(value):
     
     return -1 # anything that is not a positive int is invalid
 
-startStopText = tk.StringVar()
-startStopText.set("START")
-startStopButton = tk.Button(
-    window, textvariable=startStopText, command=handleStartStopPress, bg="green")
-startStopButton.pack(fill=tk.X, padx=5, pady=5, ipadx=20, ipady=20)
+start_stop_text = tk.StringVar()
+start_stop_text.set("START")
+start_stop_button = tk.Button(
+    window, textvariable=start_stop_text, command=handle_start_stop_press, bg="green")
+start_stop_button.pack(fill=tk.X, padx=5, pady=5, ipadx=20, ipady=20)
 
 time_label = tk.Label(window, text="Autoclick interval: ")
 time_label.pack(side=tk.LEFT, )
