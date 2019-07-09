@@ -7,6 +7,7 @@ window.title("auto-clicker")
 window.geometry("400x200")
 window.minsize(300, 150)
 window.maxsize(400, 200)
+validation_regex = r"(?P<time>[\d]+)"  # only capture numbers
 
 
 def handleStartStopPress():
@@ -26,11 +27,10 @@ def click_time():
     Ignores negative values
     """
 
-    click_reg = r"(?P<time>[\d]+)"  # only capture numbers
-    get_time = set_time.get()
-    time = re.search(click_reg, get_time)
-    if time is not None:  # make sure a valid time was entered
-        ac.Autoclicker.clicking_time = int(time.group())
+    interval_time = get_validated_interval(set_time.get())
+
+    if interval_time != -1:
+        ac.Autoclicker.clicking_time = interval_time
         set_time.delete(0, tk.END)
         set_time.insert(0, f"Interval set")
         set_time_button.focus()  # remove blinking cursor by focusing on set time button
@@ -38,6 +38,17 @@ def click_time():
         set_time.delete(0, tk.END)
         set_time.insert(0, "No change")
 
+def get_validated_interval(value):
+    """
+    takes the raw input from the interval time text field
+    returns -1 for invalid input or the validated value to be set
+    """
+
+    time = re.search(validation_regex, value)
+    if time is not None: 
+        return int(time.group()) # cast to int
+    
+    return -1 # anything that is not a positive int is invalid
 
 startStopText = tk.StringVar()
 startStopText.set("START")
