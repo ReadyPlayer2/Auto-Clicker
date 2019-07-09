@@ -19,7 +19,8 @@ class Autoclicker(object):
     def start_clicking():
         Autoclicker.clicker_thread = threading.Thread(
             target=Autoclicker.__clicking_thread)
-        # make the clicker thread a daemon so it lives and dies with the main application
+        # make the clicker thread a daemon so it lives and dies
+        # with the main application
         Autoclicker.clicker_thread.daemon = True
         Autoclicker.clicker_thread.start()
         Autoclicker.state = STATE.STARTED

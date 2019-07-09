@@ -33,7 +33,8 @@ def click_time():
         ac.Autoclicker.clicking_time = interval_time
         set_time.delete(0, tk.END)
         set_time.insert(0, f"Interval set")
-        set_time_button.focus()  # remove blinking cursor by focusing on set time button
+        # remove blinking cursor by focusing on set time button
+        set_time_button.focus()
     else:
         set_time.delete(0, tk.END)
         set_time.insert(0, "No change")
@@ -55,7 +56,10 @@ def get_validated_interval(value):
 start_stop_text = tk.StringVar()
 start_stop_text.set("START")
 start_stop_button = tk.Button(
-    window, textvariable=start_stop_text, command=handle_start_stop_press, bg="green")
+    window,
+    textvariable=start_stop_text,
+    command=handle_start_stop_press,
+    bg="green")
 start_stop_button.pack(fill=tk.X, padx=5, pady=5, ipadx=20, ipady=20)
 
 time_label = tk.Label(window, text="Autoclick interval: ")
