@@ -1,13 +1,12 @@
 import unittest
 import re
-from auto_clicker_gui import get_validated_interval
 
 class IntervalValidation(unittest.TestCase):
     def setUp(self):
         self.click_reg = r"(?P<time>[\d]+)"  # only capture numbers
 
     def test_basic(self):
-        text_input = get_validated_interval("123")
+        text_input = "123"
         time = re.search(self.click_reg, text_input)
         self.assertIsNotNone(time)
         actual_time = int(time.group())
