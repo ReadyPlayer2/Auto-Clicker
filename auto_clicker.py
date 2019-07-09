@@ -16,20 +16,22 @@ class Autoclicker(object):
     clicking_time = 5
 
     @staticmethod
-    def startClicking():
-        Autoclicker.clicker_thread = threading.Thread(target=Autoclicker.__clicking_thread)
-        # make the clicker thread a daemon so it lives and dies with the main application
+    def start_clicking():
+        Autoclicker.clicker_thread = threading.Thread(
+            target=Autoclicker.__clicking_thread)
+        # make the clicker thread a daemon so it lives and dies
+        # with the main application
         Autoclicker.clicker_thread.daemon = True
         Autoclicker.clicker_thread.start()
         Autoclicker.state = STATE.STARTED
 
     @staticmethod
-    def stopClicking():
+    def stop_clicking():
         Autoclicker.stop_event.set()
         Autoclicker.state = STATE.STOPPED
 
     @staticmethod
-    def getState():
+    def get_state():
         return Autoclicker.state
 
     @staticmethod
