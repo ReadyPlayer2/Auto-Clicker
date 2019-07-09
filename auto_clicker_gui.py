@@ -53,22 +53,41 @@ def get_validated_interval(value):
     return -1  # anything that is not a positive int is invalid
 
 
+# create start / stop button
+frame1 = tk.Frame()
+frame1.pack(side="top", fill="x")
 start_stop_text = tk.StringVar()
 start_stop_text.set("START")
 start_stop_button = tk.Button(
-    window,
+    frame1,
     textvariable=start_stop_text,
     command=handle_start_stop_press,
     bg="green")
 start_stop_button.pack(fill=tk.X, padx=5, pady=5, ipadx=20, ipady=20)
 
-time_label = tk.Label(window, text="Autoclick interval: ")
-time_label.pack(side=tk.LEFT, )
-set_time = tk.Entry(window, width=5, bg="white")
+# create set time text + button
+frame2 = tk.Frame()
+frame2.pack(side="top", fill="x")
+time_label = tk.Label(frame2, text="Autoclick interval: ")
+time_label.pack(side=tk.LEFT)
+set_time = tk.Entry(frame2, width=5, bg="white")
 set_time.pack(side=tk.LEFT, padx=5, pady=5, ipadx=18, ipady=5)
-set_time_button = tk.Button(window, text="Set", command=click_time, bg="green")
-set_time_button.pack(side=tk.RIGHT, padx=5, pady=5, ipadx=70, ipady=5)
+set_time_button = tk.Button(frame2, text="Set", command=click_time, bg="green")
+set_time_button.pack(side=tk.RIGHT,
+                     fill=tk.X, padx=5, pady=5, ipadx=70, ipady=5)
 # on left click, delete textbox contents
 set_time.bind("<Button-1>", lambda x: set_time.delete(0, tk.END))
+
+# create custom x + y location text
+frame3 = tk.Frame()
+frame3.pack(side="top", fill="x")
+x_label = tk.Label(frame3, text="X: ")
+x_label.pack(side=tk.LEFT)
+set_x = tk.Entry(frame3, width=5, bg="white")
+set_x.pack(side=tk.LEFT, padx=5, pady=5, ipadx=18, ipady=5)
+y_label = tk.Label(frame3, text="Y: ")
+y_label.pack(side=tk.LEFT)
+set_y = tk.Entry(frame3, width=5, bg="white")
+set_y.pack(side=tk.LEFT, padx=5, pady=5, ipadx=18, ipady=5)
 
 window.mainloop()
