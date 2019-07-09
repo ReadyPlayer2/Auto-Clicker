@@ -14,6 +14,8 @@ class Autoclicker(object):
     clicker_thread = None
     stop_event = threading.Event()
     clicking_time = 5
+    x = None
+    y = None
 
     @staticmethod
     def start_clicking():
@@ -38,6 +40,23 @@ class Autoclicker(object):
     def __clicking_thread():
         while not Autoclicker.stop_event.is_set():
             time.sleep(Autoclicker.clicking_time)
-            pyautogui.click()
+            if Autoclicker.x is None or Autoclicker.y is None:
+                pyautogui.click()
+            else:
+                # save current cursor position
+                (x, y) = pyautogui.position()
+                # click
+                pyautogui.click(Autoclicker.x, Autoclicker.y)
+                # move cursor back
+                pyautogui.moveTo(x, y)
+
         # reset the stop event object
         Autoclicker.stop_event = threading.Event()
+
+    @staticmethod
+    def set_x_location(x):
+        Autoclicker.x = x
+
+    @staticmethod
+    def set_y_location(y):
+        Autoclicker.y = y

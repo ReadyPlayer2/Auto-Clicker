@@ -21,7 +21,7 @@ def handle_start_stop_press():
         start_stop_button.configure(bg="green")
 
 
-def click_time():
+def set_click_time():
     """
     Set the click time to a custom value.
     Ignores negative values
@@ -29,7 +29,7 @@ def click_time():
 
     interval_time = get_validated_interval(set_time.get())
 
-    if interval_time != -1:
+    if interval_time != -1 and interval_time > 0:
         ac.Autoclicker.clicking_time = interval_time
         set_time.delete(0, tk.END)
         set_time.insert(0, f"Interval set")
@@ -38,6 +38,21 @@ def click_time():
     else:
         set_time.delete(0, tk.END)
         set_time.insert(0, "No change")
+
+
+def set_click_location():
+    """
+    Sets the click location (x,y coordinate). Requires both x and y be set.
+    """
+
+    # we can re-use validation function for int
+    x = get_validated_interval(set_x.get())
+    y = get_validated_interval(set_y.get())
+
+    if x != -1 and y != -1:
+        # we have a good coordinate
+        ac.Autoclicker.set_x_location(x)
+        ac.Autoclicker.set_y_location(y)
 
 
 def get_validated_interval(value):
@@ -72,7 +87,8 @@ time_label = tk.Label(frame2, text="Autoclick interval: ")
 time_label.pack(side=tk.LEFT)
 set_time = tk.Entry(frame2, width=5, bg="white")
 set_time.pack(side=tk.LEFT, padx=5, pady=5, ipadx=18, ipady=5)
-set_time_button = tk.Button(frame2, text="Set", command=click_time, bg="green")
+set_time_button = tk.Button(
+    frame2, text="Set interval", command=set_click_time, bg="green")
 set_time_button.pack(side=tk.RIGHT,
                      fill=tk.X, padx=5, pady=5, ipadx=70, ipady=5)
 # on left click, delete textbox contents
@@ -81,13 +97,17 @@ set_time.bind("<Button-1>", lambda x: set_time.delete(0, tk.END))
 # create custom x + y location text
 frame3 = tk.Frame()
 frame3.pack(side="top", fill="x")
-x_label = tk.Label(frame3, text="X: ")
+x_label = tk.Label(frame3, text="X:")
 x_label.pack(side=tk.LEFT)
 set_x = tk.Entry(frame3, width=5, bg="white")
 set_x.pack(side=tk.LEFT, padx=5, pady=5, ipadx=18, ipady=5)
-y_label = tk.Label(frame3, text="Y: ")
+y_label = tk.Label(frame3, text="Y:")
 y_label.pack(side=tk.LEFT)
 set_y = tk.Entry(frame3, width=5, bg="white")
 set_y.pack(side=tk.LEFT, padx=5, pady=5, ipadx=18, ipady=5)
+set_xy_button = tk.Button(frame3,
+                          text="Set click location",
+                          command=set_click_location, bg="green")
+set_xy_button.pack(side=tk.RIGHT, fill=tk.X, padx=5, pady=5, ipadx=70, ipady=5)
 
 window.mainloop()
