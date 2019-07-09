@@ -60,3 +60,8 @@ class Autoclicker(object):
     @staticmethod
     def set_y_location(y):
         Autoclicker.y = y
+
+    @staticmethod
+    def reset_x_y_location():
+        Autoclicker.x = None
+        Autoclicker.y = None
