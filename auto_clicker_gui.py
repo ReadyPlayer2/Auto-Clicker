@@ -44,11 +44,9 @@ def get_validated_interval(value):
     returns -1 for invalid input or the validated value to be set
     """
 
-    time = re.search(value)
+    time = re.search(validation_regex, value)
     if time is not None: 
-        interval_value = int(time.group()) # cast to int
-        if interval_value > 0: # checks it's positive
-            return interval_value
+        return int(time.group()) # cast to int
     
     return -1 # anything that is not a positive int is invalid
 
