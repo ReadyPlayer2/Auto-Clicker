@@ -38,6 +38,7 @@ def click_time():
         set_time.delete(0, tk.END)
         set_time.insert(0, "No change")
 
+
 def get_validated_interval(value):
     """
     takes the raw input from the interval time text field
@@ -45,10 +46,11 @@ def get_validated_interval(value):
     """
 
     time = re.search(validation_regex, value)
-    if time is not None: 
-        return int(time.group()) # cast to int
-    
-    return -1 # anything that is not a positive int is invalid
+    if time is not None:
+        return int(time.group())  # cast to int
+
+    return -1  # anything that is not a positive int is invalid
+
 
 start_stop_text = tk.StringVar()
 start_stop_text.set("START")
@@ -62,6 +64,7 @@ set_time = tk.Entry(window, width=5, bg="white")
 set_time.pack(side=tk.LEFT, padx=5, pady=5, ipadx=18, ipady=5)
 set_time_button = tk.Button(window, text="Set", command=click_time, bg="green")
 set_time_button.pack(side=tk.RIGHT, padx=5, pady=5, ipadx=70, ipady=5)
-set_time.bind("<Button-1>", lambda x: set_time.delete(0, tk.END))  # on left click, delete textbox contents
+# on left click, delete textbox contents
+set_time.bind("<Button-1>", lambda x: set_time.delete(0, tk.END))
 
 window.mainloop()
